@@ -238,4 +238,16 @@ document.getElementById('fb-go').onclick=async()=>{if(!fbStar){document.getEleme
  const b=document.getElementById('fb-go');b.disabled=true;b.textContent='Sending…';
  try{await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({name:'FEEDBACK · '+cname.value.trim(),contact:cemail.value.trim(),profile:{budget:'',fuel:'Rating '+fbStar+'/5',gearbox:'Ease: '+g('ease'),body:'Length: '+g('length'),confidence:'',warnings:[]},answers})})}catch(e){}
  document.getElementById('fb').style.display='none';document.getElementById('fb-done').style.display='block'};
-</script></body></html>
+</script><script>(function(){
+var P=new URLSearchParams(location.search).get('items');
+if(!P){location.replace('https://aarjav11-ux.github.io/appliances/#pick');return;}
+var picks=P.split('|');
+function apply(){
+ var box=document.querySelectorAll('[name=items]'); if(!box.length) return;
+ box.forEach(function(b){var on=picks.indexOf(b.value)>=0; if(b.checked!==on){b.checked=on; b.dispatchEvent(new Event('change',{bubbles:true}));}});
+ var q=box[0].closest('.q'); if(q){q.style.display='none';
+  if(!document.getElementById('pkinfo')){var d=document.createElement('div');d.id='pkinfo';d.style.cssText='background:#fff4ec;border:1px solid #f0d3bd;border-radius:12px;padding:12px 14px;margin:0 0 16px;font-size:15px';
+   d.innerHTML='<b>Appliances you picked:</b> '+picks.map(function(x){return x.replace(/</g,'')}).join(', ')+' · <a href="https://aarjav11-ux.github.io/appliances/#pick" style="color:#b55315">Change</a>';q.parentNode.insertBefore(d,q);}}
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){apply();setTimeout(apply,300)});else{apply();setTimeout(apply,300)}
+})();</script></body></html>
